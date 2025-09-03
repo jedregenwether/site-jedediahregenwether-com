@@ -16,6 +16,10 @@ enableRobotsTXT = true
   name = 'X'
   url = 'https://x.com/JedeRegenwether'
 
+[params.verification]
+  google = 'Uf9egWXGr1kdQrZiUTyNjOjeQFScQV5JB-I5_4ooL_c'
+  bing = ''
+
 [[params.profiles]]
   name = 'Dev.to'
   url = 'https://dev.to/jedediahregenwether'
