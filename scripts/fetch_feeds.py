@@ -22,6 +22,19 @@ FEEDS = [
     ("https://stackoverflow.blog/feed/", "Stack Overflow Blog"),
     ("https://www.oreilly.com/radar/feed/", "O'Reilly Radar"),
     ("http://export.arxiv.org/rss/cs.LG", "arXiv cs.LG"),
+    ("https://deepmind.google/discover/rss/", "Google DeepMind"),
+    ("https://www.microsoft.com/en-us/research/feed/", "Microsoft Research"),
+    ("https://blogs.nvidia.com/blog/category/ai/feed/", "NVIDIA AI Blog"),
+    ("https://www.technologyreview.com/topic/artificial-intelligence/feed/", "MIT Tech Review AI"),
+    ("https://engineering.atspotify.com/feed/", "Spotify Engineering"),
+    ("https://dropbox.tech/feed.xml", "Dropbox Tech"),
+    ("https://lilianweng.github.io/lil-log/atom.xml", "Lilian Weng"),
+    ("https://hai.stanford.edu/news/rss.xml", "Stanford HAI"),
+    ("https://blog.paperswithcode.com/rss/", "Papers with Code Blog"),
+    ("https://www.thoughtworks.com/insights/rss.xml", "Thoughtworks Insights"),
+    ("https://openai.com/blog/rss", "OpenAI Blog"),
+    ("https://ai.facebook.com/blog/rss/", "Meta AI Blog"),
+    ("https://research.google/blog/rss/", "Google Research"),
 ]
 
 
@@ -77,4 +90,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

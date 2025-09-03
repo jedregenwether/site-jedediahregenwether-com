@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main, master ]
   schedule:
-    - cron: '0 6 * * 1'  # Mondays 06:00 UTC
+    - cron: '0 6,18 * * *'  # Twice daily at 06:00 and 18:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -32,6 +32,9 @@ jobs:
 
       - name: Fetch curated feeds
         run: python scripts/fetch_feeds.py
+
+      - name: Generate on-site weekly digest page
+        run: python scripts/generate_digest_page.py
 
       - name: Publish weekly digest to Dev.to (optional)
         if: ${{ secrets.DEVTO_API_KEY != '' }}

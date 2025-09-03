@@ -65,6 +65,11 @@ def build_markdown(baseurl: str, items: list, year: int, week: int) -> str:
 
 
 def main():
+    # Only post once per week (Monday) unless forced
+    if os.environ.get("FORCE_WEEKLY_POST", "") != "1":
+        if datetime.now(timezone.utc).weekday() != 0:
+            print("Not weekly posting day; skipping Medium.")
+            return 0
     token = os.environ.get("MEDIUM_TOKEN", "").strip()
     if not token:
         print("MEDIUM_TOKEN not set; skipping.")
@@ -129,4 +134,3 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

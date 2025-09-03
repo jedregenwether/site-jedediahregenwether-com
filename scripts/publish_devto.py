@@ -88,6 +88,11 @@ def build_markdown(baseurl: str, items: list, year: int, week: int) -> str:
 
 
 def main():
+    # Only post once per week (Monday) unless forced
+    if os.environ.get("FORCE_WEEKLY_POST", "") != "1":
+        if datetime.now(timezone.utc).weekday() != 0:
+            print("Not weekly posting day; skipping Dev.to.")
+            return 0
     api_key = os.environ.get("DEVTO_API_KEY", "").strip()
     if not api_key:
         print("DEVTO_API_KEY not set; skipping.")
@@ -103,10 +108,13 @@ def main():
     iso = now.isocalendar()
     title = f"Weekly Digest: AI/ML & Strategy — Week {iso.year}-W{iso.week:02d}"
 
-    existing = devto_existing_titles(api_key)
-    if title in existing:
-        print("Digest already published on Dev.to; skipping.")
-        return 0
+    try:
+        existing = devto_existing_titles(api_key)
+        if title in existing:
+            print("Digest already published on Dev.to; skipping.")
+            return 0
+    except Exception as e:
+        print(f"Warning: could not check existing Dev.to posts: {e}")
 
     window = weekly_window(items)
     if not window:
@@ -140,4 +148,3 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
