@@ -33,22 +33,26 @@ jobs:
           pip install -r scripts/requirements.txt
 
       - name: Fetch curated feeds
-        run: python scripts/fetch_feeds.py
+        run: python scripts/fetch_feeds.py || echo "Feed fetch failed; continuing deploy"
+        continue-on-error: true
 
       - name: Generate on-site weekly digest page
-        run: python scripts/generate_digest_page.py
+        run: python scripts/generate_digest_page.py || echo "Digest generation failed; continuing deploy"
+        continue-on-error: true
 
       - name: Publish weekly digest to Dev.to (optional)
         if: ${{ secrets.DEVTO_API_KEY != '' }}
         env:
           DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
         run: python scripts/publish_devto.py
+        continue-on-error: true
 
       - name: Publish weekly digest to Medium (optional)
         if: ${{ secrets.MEDIUM_TOKEN != '' }}
         env:
           MEDIUM_TOKEN: ${{ secrets.MEDIUM_TOKEN }}
         run: python scripts/publish_medium.py
+        continue-on-error: true
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
