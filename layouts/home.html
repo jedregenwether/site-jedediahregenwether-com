@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ .Site.Title }}</title>
+    <meta name="description" content="{{ with .Site.Params.description }}{{ . }}{{ end }}">
+    <link rel="canonical" href="{{ .Site.BaseURL }}">
+    <meta name="robots" content="index,follow">
+    <style>
+      :root { color-scheme: dark; }
+      html, body { height: 100%; }
+      body { margin: 0; background: #000; color: #eaeaea; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; }
+      .wrap { min-height: 100%; display: flex; align-items: center; justify-content: center; }
+      .container { max-width: 860px; padding: 32px 20px; }
+      h1 { font-size: clamp(42px, 7vw, 82px); margin: 0 0 10px; letter-spacing: -0.02em; }
+      .blurb { font-size: clamp(16px, 2.4vw, 22px); color: #bdbdbd; margin: 0 0 24px; }
+      .links { display: flex; flex-wrap: wrap; gap: 12px 18px; margin: 12px 0 28px; }
+      .links a { color: #fff; text-decoration: none; opacity: 0.9; }
+      .links a:hover { opacity: 1; text-decoration: underline; }
+      .section-title { margin: 36px 0 12px; font-weight: 600; color: #d6d6d6; letter-spacing: 0.02em; }
+      .feed { list-style: none; padding: 0; margin: 0; }
+      .feed li { margin: 8px 0; }
+      .feed a { color: #9bd; text-decoration: none; }
+      .feed a:hover { text-decoration: underline; }
+      .source { color: #8a8a8a; font-size: 0.92em; margin-left: 6px; }
+      footer { margin-top: 40px; color: #6f6f6f; font-size: 0.9em; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <main class="container">
+        <h1>Jedediah Regenwether</h1>
+        <p class="blurb">{{ with .Site.Params.description }}{{ . }}{{ else }}AI/ML engineer and strategist.{{ end }}</p>
+        <div class="links">
+          {{ with .Site.Params.email }}
+            <a href="mailto:{{ . }}">{{ . }}</a>
+          {{ end }}
+          {{ range .Site.Params.profiles }}
+            <a href="{{ .url }}" rel="me noopener" target="_blank">{{ .name }}</a>
+          {{ end }}
+        </div>
+
+        <h2 class="section-title">Recent Articles</h2>
+        {{ $items := site.Data.feeds.items }}
+        {{ if $items }}
+          <ul class="feed">
+            {{ range first 20 $items }}
+              <li>
+                <a href="{{ .link }}" target="_blank" rel="noopener nofollow">{{ .title }}</a>
+                {{ with .source }}<span class="source">— {{ . }}</span>{{ end }}
+              </li>
+            {{ end }}
+          </ul>
+        {{ else }}
+          <p class="blurb">Curating reputable AI/ML and strategy reads. Feed will appear after the first scheduled refresh.</p>
+        {{ end }}
+
+        <footer>
+          <span>&copy; {{ now.Format "2006" }} {{ .Site.Title }}</span>
+        </footer>
+      </main>
+    </div>
+  </body>
+  </html>
+

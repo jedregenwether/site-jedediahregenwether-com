@@ -1,0 +1,25 @@
+baseURL = 'https://jedediahregenwether.com/'
+languageCode = 'en'
+title = 'Jedediah Regenwether'
+enableRobotsTXT = true
+
+[sitemap]
+  changefreq = 'weekly'
+  priority = 0.7
+  filename = 'sitemap.xml'
+
+[params]
+  description = 'AI/ML engineer and strategist. Building reliable, pragmatic systems that ship.'
+  email = 'contact@jedediahregenwether.com'
+
+[[params.profiles]]
+  name = 'X'
+  url = 'https://x.com/JedeRegenwether'
+
+[[params.profiles]]
+  name = 'Dev.to'
+  url = 'https://dev.to/jedediahregenwether'
+
+[[params.profiles]]
+  name = 'Medium'
+  url = 'https://medium.com/@jedediahregenwether'
